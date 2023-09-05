@@ -1,0 +1,32 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "SVK Mimer Setup",
+                "description": "This is the description",
+                "data": {
+                    "kw_available": "Specify how many KW you have available in your battery",
+                    "fee_percent": "Specify how many % your provider takes in fee",
+                    "vat": "Include VAT in prices"
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "This integration is already configured!"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "SVK Mimer Options",
+                "data": {
+                    "kw_available": "Specify how many KW you have available in your battery",
+                    "fee_percent": "Specify how many % your provider takes in fee",
+                    "vat": "Include VAT in prices"
+                }
+            }
+        }
+    }
+}
+
+  

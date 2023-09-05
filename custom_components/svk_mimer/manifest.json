@@ -1,0 +1,19 @@
+{
+  "domain": "svk_mimer",
+  "name": "SVK Mimer",
+  "after_dependencies": [
+    "http"
+  ],
+  "codeowners": [
+    "@robostlund"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/robinostlund/homeassistant-svk-mimer/",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/robinostlund/homeassistant-svk-mimer/issues",
+  "requirements": [
+    "aiosvkmimer>=0.1.12"
+  ],
+  "version": "0.0.14"
+}
