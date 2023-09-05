@@ -23,8 +23,8 @@ jobs:
 
       - name: Create zip
         run: |
-          cd custom_components/volkswagencarnet
-          zip volkswagencarnet.zip -r ./
+          cd custom_components/svk_mimer
+          zip svkmimer.zip -r ./
 
       - name: Upload zip to release
         uses: svenstaro/upload-release-action@2.7.0
