@@ -19,8 +19,8 @@ from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-#from homeassistant.helpers.entity import DeviceInfo, DeviceEntryType
-#from homeassistant.helpers.restore_state import RestoreEntity
+# from homeassistant.helpers.entity import DeviceInfo, DeviceEntryType
+# from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import (
@@ -49,10 +49,9 @@ class SVKMimerSensorRequiredKeysMixin:
 
 
 @dataclass
-class SVKMimerSensorEntityDescription(
-    SensorEntityDescription, SVKMimerSensorRequiredKeysMixin
-):
+class SVKMimerSensorEntityDescription(SensorEntityDescription, SVKMimerSensorRequiredKeysMixin):
     """Describes a sensor entity description."""
+
 
 SENSOR_TYPES: tuple[SensorEntityDescription, ...] = (
     SVKMimerSensorEntityDescription(
@@ -120,8 +119,9 @@ SENSOR_TYPES: tuple[SensorEntityDescription, ...] = (
         # device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=CURRENCY,
         value_fn=lambda data: data.prices_fcr_d_down,
-    )
+    ),
 )
+
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback) -> None:
     """Set up sensor platform."""
@@ -136,7 +136,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
                 description,
                 price_multiplier=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
                 price_percentage_fee=entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
-                price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT)
+                price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT),
             )
         else:
             sensor = SVKMimerSensor(
@@ -145,10 +145,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
                 description,
                 price_multiplier=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
                 price_percentage_fee=entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
-                price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT)
+                price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT),
             )
         entities.append(sensor)
-        
+
     async_add_entities(entities)
 
 
@@ -162,10 +162,10 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
         self,
         hass: HomeAssistant,
         coordinator,
-        description: SVKMimerSensorEntityDescription, 
+        description: SVKMimerSensorEntityDescription,
         price_multiplier: float = 0,
         price_percentage_fee: int = 0,
-        price_include_vat: bool = False
+        price_include_vat: bool = False,
     ) -> None:
         """Set up sensor entity."""
         super().__init__(coordinator)
@@ -186,7 +186,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
                 if self.price_multiplier > 1:
                     val = val * self.price_multiplier
                 if self.price_percentage_fee > 0:
-                    perc = lambda x: x/100
+                    perc = lambda x: x / 100
                     fee = val * perc(self.price_percentage_fee)
                     val -= fee
                 if self.price_include_vat:
@@ -210,15 +210,15 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
     def _get_prices_today(self) -> dict:
         """Returns only todays prices"""
         return self._get_prices_with_date(
-            prices = self.entity_description.value_fn(self.coordinator.data), date = date.today().strftime("%Y-%m-%d")
+            prices=self.entity_description.value_fn(self.coordinator.data), date=date.today().strftime("%Y-%m-%d")
         )
 
     @property
     def _get_prices_tomorrow(self) -> dict:
         """Returns only tomorrows prices"""
         return self._get_prices_with_date(
-            prices = self.entity_description.value_fn(self.coordinator.data),
-            date = (date.today() + timedelta(1)).strftime("%Y-%m-%d"),
+            prices=self.entity_description.value_fn(self.coordinator.data),
+            date=(date.today() + timedelta(1)).strftime("%Y-%m-%d"),
         )
 
     @property
@@ -274,7 +274,6 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
 
 
 class SVKMimerEarningsSensor(SVKMimerSensor):
-
     @property
     def native_value(self) -> str:
         """Return the state of the sensor."""

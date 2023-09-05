@@ -30,6 +30,7 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
+
 class SVKMimerConfigFlowHandler(ConfigFlow, domain=DOMAIN):
     """Handle config flow."""
 
@@ -59,7 +60,6 @@ class SVKMimerConfigFlowHandler(ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(step_id="user", data_schema=vol.Schema(data_schema), errors=self._errors)
 
-
     @staticmethod
     @callback
     def async_get_options_flow(config_entry: ConfigEntry) -> OptionsFlow:
@@ -80,7 +80,7 @@ class OptionsFlowHandler(OptionsFlow):
         if user_input is not None:
             # Update config entry with data from user input
             self.hass.config_entries.async_update_entry(self.config_entry, data=user_input)
-            return self.async_create_entry(title = self.config_entry, data=user_input)
+            return self.async_create_entry(title=self.config_entry, data=user_input)
 
         # create configuration schema
         data_schema = {
