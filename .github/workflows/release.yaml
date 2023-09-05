@@ -5,6 +5,9 @@ on:
     #types: [prereleased,published]
     types: [published]
 
+permissions:
+  contents: write
+
 jobs:
   release_zip_file:
     name: Prepare release asset
