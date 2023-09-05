@@ -5,7 +5,7 @@
     "http"
   ],
   "codeowners": [
-    "@robostlund"
+    "@robinostlund"
   ],
   "config_flow": true,
   "dependencies": [],
