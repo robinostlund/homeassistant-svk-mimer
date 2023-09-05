@@ -1,0 +1,7 @@
+{
+    "name": "SVK Mimer",
+    "homeassistant": "2023.8.0",
+    "hide_default_branch": true,
+    "zip_release": true,
+    "filename": "svkmimer.zip"
+  }
