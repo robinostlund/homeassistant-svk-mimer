@@ -27,10 +27,11 @@ from .const import (
     PLATFORMS,
     UPDATE_INTERVAL,
     EVENT_NEW_HOUR,
-    EVENT_NEW_DAY
+    EVENT_NEW_DAY,
 )
 
 _LOGGER = logging.getLogger(__name__)
+
 
 @dataclass
 class SVKMimerDeviceState:
@@ -40,14 +41,15 @@ class SVKMimerDeviceState:
     prices_fcr_d_up: set[dict]
     prices_fcr_d_down: set[dict]
 
+
 class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
     """Class to manage fetching SVK Mimer data."""
 
     def __init__(self, hass: HomeAssistant, *, entry: ConfigEntry) -> None:
         """Initialize data updater."""
-        super().__init__(hass,_LOGGER,name=DOMAIN,update_interval=timedelta(seconds=UPDATE_INTERVAL))
+        super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=timedelta(seconds=UPDATE_INTERVAL))
 
-        #_LOGGER.debug(f'CONFF: {entry.data[CONF_KW_AVAILABLE]}')
+        # _LOGGER.debug(f'CONFF: {entry.data[CONF_KW_AVAILABLE]}')
 
         # self.session = Mimer(
         #     kw_available=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
@@ -60,16 +62,15 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
     async def _fetch_data(self) -> SVKMimerDeviceState:
         """Fetch data from SVK Mimer"""
         _LOGGER.debug(f"called _fetch_data")
-        
+
         await self.session.fetch(
-            period_from = date.today().strftime("%Y-%m-%d"),
-            period_to = (date.today() + timedelta(1)).strftime("%Y-%m-%d")
+            period_from=date.today().strftime("%Y-%m-%d"), period_to=(date.today() + timedelta(1)).strftime("%Y-%m-%d")
         )
 
         return SVKMimerDeviceState(
-            prices_fcr_n = self.session.get_fcr_n_prices(),
-            prices_fcr_d_up = self.session.get_fcr_d_up_prices(),
-            prices_fcr_d_down = self.session.get_fcr_d_down_prices()
+            prices_fcr_n=self.session.get_fcr_n_prices(),
+            prices_fcr_d_up=self.session.get_fcr_d_up_prices(),
+            prices_fcr_d_down=self.session.get_fcr_d_down_prices(),
         )
 
     async def _async_update_data(self) -> None:
@@ -87,6 +88,7 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
             raise ConfigEntryNotReady from Exception
         # except ApiError as err:
         #     raise UpdateFailed(f"Error communicating with API: {err}")
+
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up this integration using UI."""
@@ -120,6 +122,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     return True
 
+
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Handle unload of an entry."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
@@ -128,10 +131,12 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass.data[DOMAIN].pop(entry.entry_id)
     return unload_ok
 
+
 async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Reload config entry."""
     await hass.config_entries.async_reload(entry.entry_id)
 
+
 async def update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Update listener."""
-    await hass.config_entries.async_reload(entry.entry_id)  
+    await hass.config_entries.async_reload(entry.entry_id)

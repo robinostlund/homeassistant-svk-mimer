@@ -23,14 +23,6 @@ class SVKMimerEntity(CoordinatorEntity[SVKMimerDataUpdateCoordinator]):
         """Initialize SVKMimerEntity."""
         super().__init__(coordinator)
 
-        #self.coordinator = coordinator
-
-    # @callback
-    # def _handle_coordinator_update(self) -> None:
-    #     """Handle updated data from the coordinator."""
-    #     #self._attr_is_on = self.coordinator.data
-    #     self.async_write_ha_state()
-
     def get_data(self, key: str) -> dict:
         """Get data from coordinator."""
         return self.coordinator.data.get(key)
@@ -39,12 +31,12 @@ class SVKMimerEntity(CoordinatorEntity[SVKMimerDataUpdateCoordinator]):
     def device_info(self) -> DeviceInfo:
         """Define the DeviceInfo of the sensor."""
         return DeviceInfo(
-            identifiers={(DOMAIN, 'svk_mimer')},
-            name='SVK Mimer',
-            manufacturer='SVK',
+            identifiers={(DOMAIN, "svk_mimer")},
+            name="SVK Mimer",
+            manufacturer="SVK",
             entry_type=DeviceEntryType.SERVICE,
             configuration_url=URL_SVK_MIMER,
-            model='Mimer',
+            model="Mimer",
         )
 
     @property
@@ -52,7 +44,9 @@ class SVKMimerEntity(CoordinatorEntity[SVKMimerDataUpdateCoordinator]):
         """Return the state attributes."""
         return {
             "update_success": self.coordinator.last_update_success,
-            "last_updated": self.coordinator.last_updated.strftime("%Y-%m-%d %H:%M:%S") if self.coordinator.last_updated else None
+            "last_updated": self.coordinator.last_updated.strftime("%Y-%m-%d %H:%M:%S")
+            if self.coordinator.last_updated
+            else None,
         }
 
     @property
