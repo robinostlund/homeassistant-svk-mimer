@@ -12,4 +12,4 @@ Home assistant custom component for SVK Mimer
 
 # IN DEVELOPMENT
 
-# Currently needs to be added manually to hacs.
+## Currently needs to be added manually to hacs.
