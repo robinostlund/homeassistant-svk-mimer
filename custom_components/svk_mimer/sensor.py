@@ -34,7 +34,7 @@ from .const import (
     CONF_VAT,
     DEFAULT_KW_AVAILABLE,
     DEFAULT_FEE_PERCENT,
-    DEFAULT_VAT
+    DEFAULT_VAT,
 )
 from .entity import SVKMimerEntity
 
@@ -46,8 +46,6 @@ class SVKMimerSensorRequiredKeysMixin:
     """Mixin for required keys."""
 
     value_fn: Callable[[SVKMimerEntity], float]
-    #value_multiplier: Callable[[SVKMimerEntity], float]
-    # available_fn: Callable[[SVKMimerEntity], bool]
 
 
 @dataclass
@@ -58,68 +56,68 @@ class SVKMimerSensorEntityDescription(
 
 SENSOR_TYPES: tuple[SensorEntityDescription, ...] = (
     SVKMimerSensorEntityDescription(
-        key = 'fcr_n',
-        name = 'FCR-N',
-        icon = 'mdi:cash',
+        key="fcr_n",
+        name="FCR-N",
+        icon="mdi:cash",
         entity_registry_enabled_default=True,
-        #entity_category=EntityCategory.DIAGNOSTIC,
+        # entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
-        #device_class=SensorDeviceClass.DURATION,
+        # device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=CURRENCY,
         value_fn=lambda data: data.prices_fcr_n,
     ),
     SVKMimerSensorEntityDescription(
-        key = 'fcr_n_earnings_today',
-        name = 'FCR-N Estimated Earnings Today',
-        icon = 'mdi:cash',
+        key="fcr_n_earnings_today",
+        name="FCR-N Estimated Earnings Today",
+        icon="mdi:cash",
         entity_registry_enabled_default=True,
-        #entity_category=EntityCategory.DIAGNOSTIC,
+        # entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
-        #device_class=SensorDeviceClass.DURATION,
+        # device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=CURRENCY,
         value_fn=lambda data: data.prices_fcr_n,
     ),
     SVKMimerSensorEntityDescription(
-        key = 'fcr_d_up',
-        name = 'FCR-D Up',
-        icon = 'mdi:cash',
+        key="fcr_d_up",
+        name="FCR-D Up",
+        icon="mdi:cash",
         entity_registry_enabled_default=True,
-        #entity_category=EntityCategory.DIAGNOSTIC,
+        # entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
-        #device_class=SensorDeviceClass.DURATION,
+        # device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=CURRENCY,
         value_fn=lambda data: data.prices_fcr_d_up,
     ),
     SVKMimerSensorEntityDescription(
-        key = 'fcr_d_up_earnings_today',
-        name = 'FCR-D Up Estimated Earnings Today',
-        icon = 'mdi:cash',
+        key="fcr_d_up_earnings_today",
+        name="FCR-D Up Estimated Earnings Today",
+        icon="mdi:cash",
         entity_registry_enabled_default=True,
-        #entity_category=EntityCategory.DIAGNOSTIC,
+        # entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
-        #device_class=SensorDeviceClass.DURATION,
+        # device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=CURRENCY,
         value_fn=lambda data: data.prices_fcr_d_up,
     ),
     SVKMimerSensorEntityDescription(
-        key = 'fcr_d_down',
-        name = 'FCR-D Down',
-        icon = 'mdi:cash',
+        key="fcr_d_down",
+        name="FCR-D Down",
+        icon="mdi:cash",
         entity_registry_enabled_default=True,
-        #entity_category=EntityCategory.DIAGNOSTIC,
+        # entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
-        #device_class=SensorDeviceClass.DURATION,
+        # device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=CURRENCY,
         value_fn=lambda data: data.prices_fcr_d_down,
     ),
     SVKMimerSensorEntityDescription(
-        key = 'fcr_d_down_earnings_today',
-        name = 'FCR-D Down Estimated Earnings Today',
-        icon = 'mdi:cash',
+        key="fcr_d_down_earnings_today",
+        name="FCR-D Down Estimated Earnings Today",
+        icon="mdi:cash",
         entity_registry_enabled_default=True,
-        #entity_category=EntityCategory.DIAGNOSTIC,
+        # entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
-        #device_class=SensorDeviceClass.DURATION,
+        # device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=CURRENCY,
         value_fn=lambda data: data.prices_fcr_d_down,
     )
@@ -134,20 +132,20 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
         if "_earnings_today" in description.key:
             sensor = SVKMimerEarningsSensor(
                 hass,
-                coordinator, 
+                coordinator,
                 description,
-                price_multiplier = entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
-                price_percentage_fee = entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
-                price_include_vat = entry.data.get(CONF_VAT, DEFAULT_VAT)
+                price_multiplier=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
+                price_percentage_fee=entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
+                price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT)
             )
         else:
             sensor = SVKMimerSensor(
                 hass,
-                coordinator, 
+                coordinator,
                 description,
-                price_multiplier = entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
-                price_percentage_fee = entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
-                price_include_vat = entry.data.get(CONF_VAT, DEFAULT_VAT)
+                price_multiplier=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
+                price_percentage_fee=entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
+                price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT)
             )
         entities.append(sensor)
         
@@ -160,8 +158,15 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
 
     _attr_has_entity_name = True
 
-    def __init__(self, hass: HomeAssistant, coordinator, description: SVKMimerSensorEntityDescription, 
-        price_multiplier: float = 0, price_percentage_fee: int = 0, price_include_vat: bool = False) -> None:
+    def __init__(
+        self,
+        hass: HomeAssistant,
+        coordinator,
+        description: SVKMimerSensorEntityDescription, 
+        price_multiplier: float = 0,
+        price_percentage_fee: int = 0,
+        price_include_vat: bool = False
+    ) -> None:
         """Set up sensor entity."""
         super().__init__(coordinator)
         self.hass = hass
@@ -181,7 +186,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
                 if self.price_multiplier > 1:
                     val = val * self.price_multiplier
                 if self.price_percentage_fee > 0:
-                    perc = lambda x : x/100
+                    perc = lambda x: x/100
                     fee = val * perc(self.price_percentage_fee)
                     val -= fee
                 if self.price_include_vat:
@@ -196,7 +201,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
             item = {
                 "start": key,
                 "end": (datetime.strptime(key, "%Y-%m-%d %H:%M:%S") + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S"),
-                "value": val
+                "value": val,
             }
             data.append(item)
         return data
@@ -205,8 +210,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
     def _get_prices_today(self) -> dict:
         """Returns only todays prices"""
         return self._get_prices_with_date(
-            prices = self.entity_description.value_fn(self.coordinator.data),
-            date = date.today().strftime("%Y-%m-%d")
+            prices = self.entity_description.value_fn(self.coordinator.data), date = date.today().strftime("%Y-%m-%d")
         )
 
     @property
@@ -214,7 +218,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
         """Returns only tomorrows prices"""
         return self._get_prices_with_date(
             prices = self.entity_description.value_fn(self.coordinator.data),
-            date = (date.today() + timedelta(1)).strftime("%Y-%m-%d")
+            date = (date.today() + timedelta(1)).strftime("%Y-%m-%d"),
         )
 
     @property
@@ -255,7 +259,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
         return attributes
 
     async def _handle_new_data(self) -> None:
-        #self._attr_native_value = self.entity_description.value_fn(self.coordinator.data).get(self.hour_now)
+        # self._attr_native_value = self.entity_description.value_fn(self.coordinator.data).get(self.hour_now)
         self.async_write_ha_state()
 
     async def async_added_to_hass(self):
@@ -264,7 +268,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
         _LOGGER.debug(f"called async_added_to_hass {self.name}")
 
         async_dispatcher_connect(self.hass, EVENT_NEW_DAY, self._handle_new_data)
-        #async_dispatcher_connect(self.hass, EVENT_NEW_PRICE, self._handle_new_data)
+        # async_dispatcher_connect(self.hass, EVENT_NEW_PRICE, self._handle_new_data)
         async_dispatcher_connect(self.hass, EVENT_NEW_HOUR, self._handle_new_data)
         await self._handle_new_data()
 

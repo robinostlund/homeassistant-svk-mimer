@@ -80,7 +80,7 @@ class OptionsFlowHandler(OptionsFlow):
         if user_input is not None:
             # Update config entry with data from user input
             self.hass.config_entries.async_update_entry(self.config_entry, data=user_input)
-            return self.async_create_entry(title = self.config_entry,data=user_input)
+            return self.async_create_entry(title = self.config_entry, data=user_input)
 
         # create configuration schema
         data_schema = {
@@ -90,9 +90,7 @@ class OptionsFlowHandler(OptionsFlow):
             vol.Optional(
                 CONF_FEE_PERCENT, default=self.config_entry.options.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT)
             ): vol.Coerce(int),
-            vol.Optional(
-                CONF_VAT, default=self.config_entry.options.get(CONF_VAT, DEFAULT_VAT)
-            ): bool
+            vol.Optional(CONF_VAT, default=self.config_entry.options.get(CONF_VAT, DEFAULT_VAT)): bool,
         }
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))

@@ -20,7 +20,7 @@ PLATFORMS = [
 # Configuration contants
 CONF_KW_AVAILABLE = "kw_available"
 CONF_FEE_PERCENT = "fee_percent"
-CONF_VAT = 'vat'
+CONF_VAT = "vat"
 
 # Default value contants
 DEFAULT_KW_AVAILABLE = 1
