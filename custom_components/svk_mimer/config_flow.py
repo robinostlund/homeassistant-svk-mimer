@@ -105,11 +105,11 @@ class OptionsFlowHandler(OptionsFlow):
             ): bool,
             vol.Optional(
                 CONF_MONITOR_FCR_D_DOWN,
-                default=self.config_entry.options.get(CONF_MONITOR_FCR_D_DOWN, DEFAULT_MONITOR_FCR_D_DOWN)
+                default=self.config_entry.options.get(CONF_MONITOR_FCR_D_DOWN, DEFAULT_MONITOR_FCR_D_DOWN),
             ): bool,
             vol.Optional(
                 CONF_MONITOR_FCR_D_UP,
-                default=self.config_entry.options.get(CONF_MONITOR_FCR_D_UP, DEFAULT_MONITOR_FCR_D_UP)
+                default=self.config_entry.options.get(CONF_MONITOR_FCR_D_UP, DEFAULT_MONITOR_FCR_D_UP),
             ): bool,
         }
 
