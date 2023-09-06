@@ -49,14 +49,6 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
         """Initialize data updater."""
         super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=timedelta(seconds=UPDATE_INTERVAL))
 
-        # _LOGGER.debug(f'CONFF: {entry.data[CONF_KW_AVAILABLE]}')
-
-        # self.session = Mimer(
-        #     kw_available=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
-        #     #fee_percentage=entry.data.get(CONF_VAT, DEFAULT_VAT)
-        #     #vat=entry.data.get(CONF_VAT, DEFAULT_VAT)
-        # )
-
         self.session = Mimer()
 
     async def _fetch_data(self) -> SVKMimerDeviceState:

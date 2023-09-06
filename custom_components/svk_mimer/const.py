@@ -21,11 +21,17 @@ PLATFORMS = [
 CONF_KW_AVAILABLE = "kw_available"
 CONF_FEE_PERCENT = "fee_percent"
 CONF_VAT = "vat"
+CONF_MONITOR_FCR_N = "monitor_fcr_n"
+CONF_MONITOR_FCR_D_DOWN = "monitor_fcr_d_down"
+CONF_MONITOR_FCR_D_UP = "monitor_fcr_d_up"
 
 # Default value contants
 DEFAULT_KW_AVAILABLE = 1
 DEFAULT_FEE_PERCENT = 0
 DEFAULT_VAT = False
+DEFAULT_MONITOR_FCR_N = False
+DEFAULT_MONITOR_FCR_D_DOWN = True
+DEFAULT_MONITOR_FCR_D_UP = True
 
 
 # Message constants
@@ -41,5 +47,5 @@ If you have any issues with this you need to open an issue here:
 
 CURRENT_CONFIG_VER = 1
 
-EVENT_NEW_HOUR = "svk_mimer_update_hour"
-EVENT_NEW_DAY = "svk_mimer_update_day"
+EVENT_NEW_HOUR = f"{DOMAIN}_update_hour"
+EVENT_NEW_DAY = f"{DOMAIN}_update_day"
