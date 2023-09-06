@@ -100,9 +100,15 @@ class OptionsFlowHandler(OptionsFlow):
                 CONF_FEE_PERCENT, default=self.config_entry.options.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT)
             ): vol.Coerce(int),
             vol.Optional(CONF_VAT, default=self.config_entry.options.get(CONF_VAT, DEFAULT_VAT)): bool,
-            vol.Optional(CONF_MONITOR_FCR_N, default=self.config_entry.options.get(CONF_MONITOR_FCR_N, DEFAULT_MONITOR_FCR_N)): bool,
-            vol.Optional(CONF_MONITOR_FCR_D_DOWN, default=self.config_entry.options.get(CONF_MONITOR_FCR_D_DOWN, DEFAULT_MONITOR_FCR_D_DOWN)): bool,
-            vol.Optional(CONF_MONITOR_FCR_D_UP, default=self.config_entry.options.get(CONF_MONITOR_FCR_D_UP, DEFAULT_MONITOR_FCR_D_UP)): bool,
+            vol.Optional(
+                CONF_MONITOR_FCR_N, default=self.config_entry.options.get(CONF_MONITOR_FCR_N, DEFAULT_MONITOR_FCR_N)
+            ): bool,
+            vol.Optional(
+                CONF_MONITOR_FCR_D_DOWN, default=self.config_entry.options.get(CONF_MONITOR_FCR_D_DOWN, DEFAULT_MONITOR_FCR_D_DOWN)
+            ): bool,
+            vol.Optional(
+                CONF_MONITOR_FCR_D_UP, default=self.config_entry.options.get(CONF_MONITOR_FCR_D_UP, DEFAULT_MONITOR_FCR_D_UP)
+            ): bool,
         }
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
