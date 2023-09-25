@@ -410,6 +410,7 @@ class SVKMimerEarningsTodaySensor(SVKMimerSensor):
             attributes = {**attributes, **self.add_state_attributes}
         return attributes
 
+
 class SVKMimerEarningsTotalSensor(SVKMimerSensor, RestoreEntity):
     # https://aarongodfrey.dev/programming/restoring-an-entity-in-home-assistant/
     @property

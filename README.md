@@ -9,7 +9,8 @@
 # homeassistant-svk-mimer
 Home assistant custom component for SVK Mimer
 
-
 # IN DEVELOPMENT
 
-## Currently needs to be added manually to hacs.
+
+## HACS Installation
+Go to the hacs store and use the repo url https://github.com/robinostlund/homeassistant-svk-mimer and add this as a custom repository under settings.
