@@ -9,7 +9,56 @@
 # homeassistant-svk-mimer
 Home assistant custom component for SVK Mimer
 
-
 # IN DEVELOPMENT
 
-## Currently needs to be added manually to hacs.
+
+## HACS Installation
+Go to the hacs store and use the repo url https://github.com/robinostlund/homeassistant-svk-mimer and add this as a custom repository under settings.
+
+
+## Apex Charts
+### FCR-D Down
+Example configuration to show my expecting earnings per hour
+```
+type: custom:apexcharts-card
+graph_span: 24h
+header:
+  title: FCR-D DOWN (SEK)
+  show: true
+span:
+  start: day
+now:
+  show: true
+  label: Now
+series:
+  - entity: sensor.svk_mimer_price_fcr_d_down
+    type: column
+    float_precision: 3
+    data_generator: |
+      return entity.attributes.today_raw.map((start, index) => {
+        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
+      });
+```
+
+### FCR-D Up
+Example configuration to show my expecting earnings per hour
+```
+type: custom:apexcharts-card
+graph_span: 24h
+header:
+  title: FCR-D UP (SEK)
+  show: true
+span:
+  start: day
+now:
+  show: true
+  label: Now
+series:
+  - entity: sensor.svk_mimer_price_fcr_d_up
+    type: column
+    float_precision: 3
+    data_generator: |
+      return entity.attributes.today_raw.map((start, index) => {
+        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
+      });
+```

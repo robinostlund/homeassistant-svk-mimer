@@ -4,7 +4,7 @@ import logging
 from datetime import datetime, date
 
 from homeassistant.core import callback
-from homeassistant.helpers.entity import DeviceInfo, DeviceEntryType
+from homeassistant.helpers.device_registry import DeviceInfo, DeviceEntryType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.util import dt as dt_util
 
