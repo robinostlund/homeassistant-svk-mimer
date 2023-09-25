@@ -10,7 +10,10 @@
                     "vat": "Include VAT in prices",
                     "monitor_fcr_n": "Monitor FCR-N",
                     "monitor_fcr_d_down": "Monitor FCR-D Down",
-                    "monitor_fcr_d_up": "Monitor FCR-D Down"
+                    "monitor_fcr_d_up": "Monitor FCR-D Up",
+                    "subscribing_fcr_n": "Subscribing FCR-N",
+                    "subscribing_fcr_d_down": "Subscribing FCR-D Down",
+                    "subscribing_fcr_d_up": "Subscribing FCR-D Up"
                 }
             }
         },
@@ -28,7 +31,10 @@
                     "vat": "Include VAT in prices",
                     "monitor_fcr_n": "Monitor FCR-N",
                     "monitor_fcr_d_down": "Monitor FCR-D Down",
-                    "monitor_fcr_d_up": "Monitor FCR-D Down"
+                    "monitor_fcr_d_up": "Monitor FCR-D Up",
+                    "subscribing_fcr_n": "Subscribing FCR-N",
+                    "subscribing_fcr_d_down": "Subscribing FCR-D Down",
+                    "subscribing_fcr_d_up": "Subscribing FCR-D Up"
                 }
             }
         }

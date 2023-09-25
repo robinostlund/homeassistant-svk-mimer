@@ -24,6 +24,9 @@ CONF_VAT = "vat"
 CONF_MONITOR_FCR_N = "monitor_fcr_n"
 CONF_MONITOR_FCR_D_DOWN = "monitor_fcr_d_down"
 CONF_MONITOR_FCR_D_UP = "monitor_fcr_d_up"
+CONF_SUBSCRIBING_FCR_N = "subscribing_fcr_n"
+CONF_SUBSCRIBING_FCR_D_DOWN = "subscribing_fcr_d_down"
+CONF_SUBSCRIBING_FCR_D_UP = "subscribing_fcr_d_up"
 
 # Default value contants
 DEFAULT_KW_AVAILABLE = 1
@@ -32,7 +35,9 @@ DEFAULT_VAT = False
 DEFAULT_MONITOR_FCR_N = False
 DEFAULT_MONITOR_FCR_D_DOWN = True
 DEFAULT_MONITOR_FCR_D_UP = True
-
+DEFAULT_SUBSCRIBING_FCR_N = False
+DEFAULT_SUBSCRIBING_FCR_D_DOWN = False
+DEFAULT_SUBSCRIBING_FCR_D_UP = False
 
 # Message constants
 STARTUP_MESSAGE = f"""
