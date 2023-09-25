@@ -1,6 +1,6 @@
 [![buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://www.buymeacoffee.com/robinostlund)
 
-This platform plugin allows you to see some information from volkswagen carnet related to your car that has a valid carnet subscription.
+This platform plugin allows you to see some information from svk mimer.
 
 {%- if selected_tag == "master" %}
 ## This is a development version!
