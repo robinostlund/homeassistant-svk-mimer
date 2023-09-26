@@ -5,7 +5,7 @@
                 "title": "SVK Mimer Setup",
                 "description": "This is the description",
                 "data": {
-                    "kw_available": "Specify how many kW you have available in your battery",
+                    "kw_available": "Specify how many kW your battery/inverter can deliver",
                     "fee_percent": "Specify how many % your provider takes in fee",
                     "vat": "Include VAT in prices",
                     "monitor_fcr_n": "Monitor FCR-N",
