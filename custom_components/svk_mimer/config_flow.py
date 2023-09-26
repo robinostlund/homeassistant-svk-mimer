@@ -48,6 +48,7 @@ class SVKMimerConfigFlowHandler(ConfigFlow, domain=DOMAIN):
 
     def __init__(self) -> None:
         """Init SVKMimerConfigFlowHandler."""
+        super().__init__()
         self._errors: dict[str, Any] = {}
 
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> FlowResult:
@@ -84,6 +85,7 @@ class OptionsFlowHandler(OptionsFlow):
 
     def __init__(self, config_entry: ConfigEntry) -> None:
         """Initialize the SVKMimerOptionsFlowHandler."""
+        super().__init__()
         self.config_entry = config_entry
         _LOGGER.debug(self.config_entry.options)
 

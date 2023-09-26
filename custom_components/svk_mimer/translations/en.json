@@ -9,7 +9,7 @@
                     "fee_percent": "Specify how many % your provider takes in fee",
                     "vat": "Include VAT in prices",
                     "monitor_fcr_n": "Monitor FCR-N",
-                    "monitor_fcr_dn": "Monitor FCR-D",
+                    "monitor_fcr_d": "Monitor FCR-D",
                     "subscribing_fcr_n": "Subscribing FCR-N",
                     "subscribing_fcr_d": "Subscribing FCR-D"
                 }
