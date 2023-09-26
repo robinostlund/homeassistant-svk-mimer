@@ -38,6 +38,7 @@ class SVKMimerDeviceState:
     """Data retrieved from a SVK Mimer."""
 
     prices_fcr_n: set[dict]
+    prices_fcr_d: set[dict]
     prices_fcr_d_up: set[dict]
     prices_fcr_d_down: set[dict]
 
@@ -61,6 +62,7 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
 
         return SVKMimerDeviceState(
             prices_fcr_n=self.session.get_fcr_n_prices(),
+            prices_fcr_d=self.session.get_fcr_d_prices(),
             prices_fcr_d_up=self.session.get_fcr_d_up_prices(),
             prices_fcr_d_down=self.session.get_fcr_d_down_prices(),
         )
