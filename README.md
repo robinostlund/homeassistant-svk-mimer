@@ -17,6 +17,52 @@ Go to the hacs store and use the repo url https://github.com/robinostlund/homeas
 
 
 ## Apex Charts
+### FCR-N
+Example configuration to show my expecting earnings per hour
+```
+type: custom:apexcharts-card
+graph_span: 24h
+header:
+  title: FCR-N (SEK)
+  show: true
+span:
+  start: day
+now:
+  show: true
+  label: Now
+series:
+  - entity: sensor.svk_mimer_price_fcr_n
+    type: column
+    float_precision: 3
+    data_generator: |
+      return entity.attributes.today_raw.map((start, index) => {
+        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
+      });
+```
+
+### FCR-D
+Example configuration to show my expecting earnings per hour
+```
+type: custom:apexcharts-card
+graph_span: 24h
+header:
+  title: FCR-D (SEK)
+  show: true
+span:
+  start: day
+now:
+  show: true
+  label: Now
+series:
+  - entity: sensor.svk_mimer_price_fcr_d
+    type: column
+    float_precision: 3
+    data_generator: |
+      return entity.attributes.today_raw.map((start, index) => {
+        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
+      });
+```
+
 ### FCR-D Down
 Example configuration to show my expecting earnings per hour
 ```
