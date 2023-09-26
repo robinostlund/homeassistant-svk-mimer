@@ -19,7 +19,7 @@ Go to the hacs store and use the repo url https://github.com/robinostlund/homeas
 ## Apex Charts
 ### FCR-N
 Example configuration to show my expecting earnings per hour
-```
+```bash
 type: custom:apexcharts-card
 graph_span: 24h
 header:
@@ -42,7 +42,7 @@ series:
 
 ### FCR-D
 Example configuration to show my expecting earnings per hour
-```
+```bash
 type: custom:apexcharts-card
 graph_span: 24h
 header:
@@ -65,7 +65,7 @@ series:
 
 ### FCR-D Down
 Example configuration to show my expecting earnings per hour
-```
+```bash
 type: custom:apexcharts-card
 graph_span: 24h
 header:
@@ -88,7 +88,7 @@ series:
 
 ### FCR-D Up
 Example configuration to show my expecting earnings per hour
-```
+```bash
 type: custom:apexcharts-card
 graph_span: 24h
 header:
