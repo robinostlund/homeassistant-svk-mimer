@@ -21,21 +21,17 @@ from .const import (
     DOMAIN,
     CONF_KW_AVAILABLE,
     CONF_MONITOR_FCR_N,
-    CONF_MONITOR_FCR_D_DOWN,
-    CONF_MONITOR_FCR_D_UP,
+    CONF_MONITOR_FCR_D,
     CONF_FEE_PERCENT,
     CONF_SUBSCRIBING_FCR_N,
-    CONF_SUBSCRIBING_FCR_D_DOWN,
-    CONF_SUBSCRIBING_FCR_D_UP,
+    CONF_SUBSCRIBING_FCR_D,
     CONF_VAT,
     DEFAULT_KW_AVAILABLE,
     DEFAULT_MONITOR_FCR_N,
-    DEFAULT_MONITOR_FCR_D_DOWN,
-    DEFAULT_MONITOR_FCR_D_UP,
+    DEFAULT_MONITOR_FCR_D,
     DEFAULT_FEE_PERCENT,
     DEFAULT_SUBSCRIBING_FCR_N,
-    DEFAULT_SUBSCRIBING_FCR_D_DOWN,
-    DEFAULT_SUBSCRIBING_FCR_D_UP,
+    DEFAULT_SUBSCRIBING_FCR_D,
     DEFAULT_VAT,
     CURRENT_CONFIG_VER,
 )
@@ -69,11 +65,9 @@ class SVKMimerConfigFlowHandler(ConfigFlow, domain=DOMAIN):
             vol.Optional(CONF_FEE_PERCENT, default=DEFAULT_FEE_PERCENT): vol.Coerce(int),
             vol.Optional(CONF_VAT, default=DEFAULT_VAT): bool,
             vol.Optional(CONF_MONITOR_FCR_N, default=DEFAULT_MONITOR_FCR_N): bool,
-            vol.Optional(CONF_MONITOR_FCR_D_DOWN, default=DEFAULT_MONITOR_FCR_D_DOWN): bool,
-            vol.Optional(CONF_MONITOR_FCR_D_UP, default=DEFAULT_MONITOR_FCR_D_UP): bool,
+            vol.Optional(CONF_MONITOR_FCR_D, default=DEFAULT_MONITOR_FCR_D): bool,
             vol.Optional(CONF_SUBSCRIBING_FCR_N, default=DEFAULT_SUBSCRIBING_FCR_N): bool,
-            vol.Optional(CONF_SUBSCRIBING_FCR_D_DOWN, default=DEFAULT_SUBSCRIBING_FCR_D_DOWN): bool,
-            vol.Optional(CONF_SUBSCRIBING_FCR_D_UP, default=DEFAULT_SUBSCRIBING_FCR_D_UP): bool,
+            vol.Optional(CONF_SUBSCRIBING_FCR_D, default=DEFAULT_SUBSCRIBING_FCR_D): bool,
         }
 
         return self.async_show_form(step_id="user", data_schema=vol.Schema(data_schema), errors=self._errors)
@@ -115,24 +109,16 @@ class OptionsFlowHandler(OptionsFlow):
                 CONF_MONITOR_FCR_N, default=self.config_entry.data.get(CONF_MONITOR_FCR_N, DEFAULT_MONITOR_FCR_N)
             ): bool,
             vol.Optional(
-                CONF_MONITOR_FCR_D_DOWN,
-                default=self.config_entry.data.get(CONF_MONITOR_FCR_D_DOWN, DEFAULT_MONITOR_FCR_D_DOWN),
-            ): bool,
-            vol.Optional(
-                CONF_MONITOR_FCR_D_UP,
-                default=self.config_entry.data.get(CONF_MONITOR_FCR_D_UP, DEFAULT_MONITOR_FCR_D_UP),
+                CONF_MONITOR_FCR_D,
+                default=self.config_entry.data.get(CONF_MONITOR_FCR_D, DEFAULT_MONITOR_FCR_D),
             ): bool,
             vol.Optional(
                 CONF_SUBSCRIBING_FCR_N,
                 default=self.config_entry.data.get(CONF_SUBSCRIBING_FCR_N, DEFAULT_SUBSCRIBING_FCR_N),
             ): bool,
             vol.Optional(
-                CONF_SUBSCRIBING_FCR_D_DOWN,
-                default=self.config_entry.data.get(CONF_SUBSCRIBING_FCR_D_DOWN, DEFAULT_SUBSCRIBING_FCR_D_DOWN),
-            ): bool,
-            vol.Optional(
-                CONF_SUBSCRIBING_FCR_D_UP,
-                default=self.config_entry.data.get(CONF_SUBSCRIBING_FCR_D_UP, DEFAULT_SUBSCRIBING_FCR_D_UP),
+                CONF_SUBSCRIBING_FCR_D,
+                default=self.config_entry.data.get(CONF_SUBSCRIBING_FCR_D, DEFAULT_SUBSCRIBING_FCR_D),
             ): bool,
         }
 
