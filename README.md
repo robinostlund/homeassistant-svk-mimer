@@ -17,94 +17,141 @@ Go to the hacs store and use the repo url https://github.com/robinostlund/homeas
 
 
 ## Apex Charts
-### FCR-N
-Example configuration to show my expecting earnings per hour
+### FCR-D Forecast
+Example configuration to show FCR-D 24h forecast
+![Alt text](assets/example-fcr-d-forecast.png?raw=true "FCR-D Forecast")
 ```bash
 type: custom:apexcharts-card
-graph_span: 24h
-header:
-  title: FCR-N (SEK)
-  show: true
-span:
-  start: day
 now:
   show: true
-  label: Now
-series:
-  - entity: sensor.svk_mimer_price_fcr_n
-    type: column
-    float_precision: 3
-    data_generator: |
-      return entity.attributes.today_raw.map((start, index) => {
-        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
-      });
-```
-
-### FCR-D
-Example configuration to show my expecting earnings per hour
-```bash
-type: custom:apexcharts-card
-graph_span: 24h
+  label: NOW
+graph_span: 2d
+stacked: true
+update_interval: 5min
+yaxis:
+  - id: first
+    min: ~0
+    apex_config:
+      title:
+        text: SEK
+      decimalsInFloat: 2
+      tickAmount: 4
+      forceNiceScale: true
+      tooltip:
+        enabled: true
+        shared: true
+apex_config:
+  chart:
+    height: 350px
+  xaxis:
+    tooltip:
+      enabled: false
+all_series_config:
+  type: column
+  show:
+    extremas: false
+    in_header: true
+    legend_value: false
+    offset_in_name: false
 header:
-  title: FCR-D (SEK)
+  title: FCR-D Forecast - 24 hours
   show: true
+  show_states: true
+  colorize_states: true
+  standard_format: true
+  disable_actions: true
 span:
   start: day
-now:
-  show: true
-  label: Now
-series:
-  - entity: sensor.svk_mimer_price_fcr_d
-    type: column
-    float_precision: 3
-    data_generator: |
-      return entity.attributes.today_raw.map((start, index) => {
-        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
-      });
-```
-
-### FCR-D Down
-Example configuration to show my expecting earnings per hour
-```bash
-type: custom:apexcharts-card
-graph_span: 24h
-header:
-  title: FCR-D DOWN (SEK)
-  show: true
-span:
-  start: day
-now:
-  show: true
-  label: Now
+  offset: '-0h'
 series:
   - entity: sensor.svk_mimer_price_fcr_d_down
-    type: column
-    float_precision: 3
+    color: YellowGreen
+    name: FCR-D Down
+    yaxis_id: first
     data_generator: |
-      return entity.attributes.today_raw.map((start, index) => {
+      return (entity.attributes.today_raw.map((start, index) => {
         return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
-      });
+      })).concat(entity.attributes.tomorrow_raw.map((start, index) => {
+        return [new Date(start["start"]).getTime(), entity.attributes.tomorrow_raw[index]["value"]];
+      }));
+  - entity: sensor.svk_mimer_price_fcr_d_up
+    color: turquoise
+    name: FCR-D Up
+    yaxis_id: first
+    data_generator: |
+      return (entity.attributes.today_raw.map((start, index) => {
+        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
+      })).concat(entity.attributes.tomorrow_raw.map((start, index) => {
+        return [new Date(start["start"]).getTime(), entity.attributes.tomorrow_raw[index]["value"]];
+      }));
 ```
 
-### FCR-D Up
-Example configuration to show my expecting earnings per hour
+### FCR-D History
+Example configuration to show FCR-D 12 months earnings history
+![Alt text](assets/example-fcr-d-history.png?raw=true "FCR-D History")
 ```bash
 type: custom:apexcharts-card
-graph_span: 24h
-header:
-  title: FCR-D UP (SEK)
-  show: true
-span:
-  start: day
 now:
+  show: false
+  label: NOW
+graph_span: 12month
+stacked: true
+update_interval: 5min
+yaxis:
+  - id: first
+    min: ~0
+    apex_config:
+      title:
+        text: SEK
+      decimalsInFloat: 2
+      tickAmount: 4
+      forceNiceScale: true
+      tooltip:
+        enabled: true
+        shared: true
+apex_config:
+  chart:
+    height: 350px
+  xaxis:
+    tooltip:
+      enabled: false
+all_series_config:
+  type: column
+  group_by:
+    func: sum
+    duration: 1month
+    fill: zero
+    start_with_last: false
+  show:
+    extremas: false
+    in_header: true
+    legend_value: false
+    offset_in_name: false
+header:
+  title: FCR-D History - 12 months
   show: true
-  label: Now
+  show_states: false
+  colorize_states: true
+  standard_format: true
+  disable_actions: true
+span:
+  start: month
+  offset: '-11month'
 series:
-  - entity: sensor.svk_mimer_price_fcr_d_up
-    type: column
-    float_precision: 3
-    data_generator: |
-      return entity.attributes.today_raw.map((start, index) => {
-        return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
-      });
+  - entity: sensor.svk_mimer_earnings_today_fcr_d_down
+    color: YellowGreen
+    name: FCR-D Down
+    yaxis_id: first
+    statistics:
+      type: state
+      period: day
+      align: start
+  - entity: sensor.svk_mimer_earnings_today_fcr_d_up
+    color: turquoise
+    name: FCR-D Up
+    yaxis_id: first
+    statistics:
+      type: state
+      period: day
+      align: start
 ```
