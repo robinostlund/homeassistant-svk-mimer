@@ -24,21 +24,18 @@ now:
 graph_span: 2d
 stacked: true
 update_interval: 5min
-yaxis:
-  - id: first
-    min: ~0
-    apex_config:
-      title:
-        text: SEK
-      decimalsInFloat: 2
-      tickAmount: 4
-      forceNiceScale: true
-      tooltip:
-        enabled: true
-        shared: true
 apex_config:
   chart:
     height: 350px
+  yaxis:
+    forceNiceScale: true
+    decimalsInFloat: 2
+    min: 0
+    title:
+      text: SEK
+      offsetX: 10
+      offsetY: 0
+      rotate: -90
   xaxis:
     tooltip:
       enabled: false
@@ -63,7 +60,6 @@ series:
   - entity: sensor.svk_mimer_price_fcr_d_down
     color: YellowGreen
     name: FCR-D Down
-    yaxis_id: first
     data_generator: |
       return (entity.attributes.today_raw.map((start, index) => {
         return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
@@ -73,7 +69,6 @@ series:
   - entity: sensor.svk_mimer_price_fcr_d_up
     color: turquoise
     name: FCR-D Up
-    yaxis_id: first
     data_generator: |
       return (entity.attributes.today_raw.map((start, index) => {
         return [new Date(start["start"]).getTime(), entity.attributes.today_raw[index]["value"]];
@@ -93,21 +88,18 @@ now:
 graph_span: 12month
 stacked: true
 update_interval: 5min
-yaxis:
-  - id: first
-    min: ~0
-    apex_config:
-      title:
-        text: SEK
-      decimalsInFloat: 2
-      tickAmount: 4
-      forceNiceScale: true
-      tooltip:
-        enabled: true
-        shared: true
 apex_config:
   chart:
     height: 350px
+  yaxis:
+    forceNiceScale: true
+    decimalsInFloat: 2
+    min: 0
+    title:
+      text: SEK
+      offsetX: 10
+      offsetY: 0
+      rotate: -90
   xaxis:
     tooltip:
       enabled: false
@@ -137,7 +129,6 @@ series:
   - entity: sensor.svk_mimer_earnings_today_fcr_d_down
     color: YellowGreen
     name: FCR-D Down
-    yaxis_id: first
     statistics:
       type: state
       period: day
@@ -145,7 +136,6 @@ series:
   - entity: sensor.svk_mimer_earnings_today_fcr_d_up
     color: turquoise
     name: FCR-D Up
-    yaxis_id: first
     statistics:
       type: state
       period: day
