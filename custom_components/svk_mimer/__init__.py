@@ -116,9 +116,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     # https://github.com/custom-components/nordpool/blob/master/custom_components/nordpool/__init__.py
     event_new_hr = async_track_time_change(hass, cb_new_hr, minute=0, second=0)
-    event_new_day = async_track_time_change(
-        hass, cb_new_day, hour=0, minute=0, second=0
-    )
+    event_new_day = async_track_time_change(hass, cb_new_day, hour=0, minute=0, second=0)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(update_listener))

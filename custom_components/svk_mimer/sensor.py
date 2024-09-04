@@ -56,9 +56,7 @@ class SVKMimerSensorRequiredKeysMixin:
 
 
 @dataclass
-class SVKMimerSensorEntityDescription(
-    SensorEntityDescription, SVKMimerSensorRequiredKeysMixin
-):
+class SVKMimerSensorEntityDescription(SensorEntityDescription, SVKMimerSensorRequiredKeysMixin):
     """Describes a sensor entity description."""
 
 
@@ -258,9 +256,7 @@ SENSOR_TYPES: tuple[SensorEntityDescription, ...] = (
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
-) -> None:
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback) -> None:
     """Set up sensor platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
 
@@ -275,12 +271,8 @@ async def async_setup_entry(
                 hass,
                 coordinator,
                 description,
-                price_multiplier=entry.data.get(
-                    CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE
-                ),
-                price_percentage_fee=entry.data.get(
-                    CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT
-                ),
+                price_multiplier=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
+                price_percentage_fee=entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
                 price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT),
             )
             entities.append(sensor)
@@ -302,12 +294,8 @@ async def async_setup_entry(
                 hass,
                 coordinator,
                 description,
-                price_multiplier=entry.data.get(
-                    CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE
-                ),
-                price_percentage_fee=entry.data.get(
-                    CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT
-                ),
+                price_multiplier=entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
+                price_percentage_fee=entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
                 price_include_vat=entry.data.get(CONF_VAT, DEFAULT_VAT),
             )
             entities.append(sensor)
@@ -371,9 +359,7 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
         for key, val in prices.items():
             item = {
                 "start": key,
-                "end": (
-                    datetime.strptime(key, "%Y-%m-%d %H:%M:%S") + timedelta(hours=1)
-                ).strftime("%Y-%m-%d %H:%M:%S"),
+                "end": (datetime.strptime(key, "%Y-%m-%d %H:%M:%S") + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S"),
                 "value": val,
             }
             data.append(item)

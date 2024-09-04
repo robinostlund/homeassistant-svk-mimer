@@ -57,9 +57,7 @@ class SVKMimerConfigFlowHandler(ConfigFlow, domain=DOMAIN):
         super().__init__()
         self._errors: dict[str, Any] = {}
 
-    async def async_step_user(
-        self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    async def async_step_user(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         """Handle a flow initialized by the user."""
         # Check if already configured
         await self.async_set_unique_id(DOMAIN)
@@ -70,26 +68,16 @@ class SVKMimerConfigFlowHandler(ConfigFlow, domain=DOMAIN):
 
         # create configuration schema
         data_schema = {
-            vol.Required(CONF_KW_AVAILABLE, default=DEFAULT_KW_AVAILABLE): vol.Coerce(
-                float
-            ),
-            vol.Optional(CONF_FEE_PERCENT, default=DEFAULT_FEE_PERCENT): vol.Coerce(
-                int
-            ),
+            vol.Required(CONF_KW_AVAILABLE, default=DEFAULT_KW_AVAILABLE): vol.Coerce(float),
+            vol.Optional(CONF_FEE_PERCENT, default=DEFAULT_FEE_PERCENT): vol.Coerce(int),
             vol.Optional(CONF_VAT, default=DEFAULT_VAT): bool,
             vol.Optional(CONF_MONITOR_FCR_N, default=DEFAULT_MONITOR_FCR_N): bool,
             vol.Optional(CONF_MONITOR_FCR_D, default=DEFAULT_MONITOR_FCR_D): bool,
-            vol.Optional(
-                CONF_SUBSCRIBING_FCR_N, default=DEFAULT_SUBSCRIBING_FCR_N
-            ): bool,
-            vol.Optional(
-                CONF_SUBSCRIBING_FCR_D, default=DEFAULT_SUBSCRIBING_FCR_D
-            ): bool,
+            vol.Optional(CONF_SUBSCRIBING_FCR_N, default=DEFAULT_SUBSCRIBING_FCR_N): bool,
+            vol.Optional(CONF_SUBSCRIBING_FCR_D, default=DEFAULT_SUBSCRIBING_FCR_D): bool,
         }
 
-        return self.async_show_form(
-            step_id="user", data_schema=vol.Schema(data_schema), errors=self._errors
-        )
+        return self.async_show_form(step_id="user", data_schema=vol.Schema(data_schema), errors=self._errors)
 
     @staticmethod
     @callback
@@ -107,16 +95,12 @@ class OptionsFlowHandler(OptionsFlow):
         self.config_entry = config_entry
         _LOGGER.debug(self.config_entry.options)
 
-    async def async_step_init(
-        self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    async def async_step_init(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         """Handle options flow."""
 
         if user_input is not None:
             # Update config entry with data from user input
-            self.hass.config_entries.async_update_entry(
-                self.config_entry, data=user_input
-            )
+            self.hass.config_entries.async_update_entry(self.config_entry, data=user_input)
             # return self.async_create_entry(title=self.config_entry, data=user_input)
             return self.async_create_entry(title=None, data=user_input)
 
@@ -124,42 +108,28 @@ class OptionsFlowHandler(OptionsFlow):
         data_schema = {
             vol.Required(
                 CONF_KW_AVAILABLE,
-                default=self.config_entry.data.get(
-                    CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE
-                ),
+                default=self.config_entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
             ): vol.Coerce(float),
             vol.Optional(
                 CONF_FEE_PERCENT,
-                default=self.config_entry.data.get(
-                    CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT
-                ),
+                default=self.config_entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
             ): vol.Coerce(int),
-            vol.Optional(
-                CONF_VAT, default=self.config_entry.data.get(CONF_VAT, DEFAULT_VAT)
-            ): bool,
+            vol.Optional(CONF_VAT, default=self.config_entry.data.get(CONF_VAT, DEFAULT_VAT)): bool,
             vol.Optional(
                 CONF_MONITOR_FCR_N,
-                default=self.config_entry.data.get(
-                    CONF_MONITOR_FCR_N, DEFAULT_MONITOR_FCR_N
-                ),
+                default=self.config_entry.data.get(CONF_MONITOR_FCR_N, DEFAULT_MONITOR_FCR_N),
             ): bool,
             vol.Optional(
                 CONF_MONITOR_FCR_D,
-                default=self.config_entry.data.get(
-                    CONF_MONITOR_FCR_D, DEFAULT_MONITOR_FCR_D
-                ),
+                default=self.config_entry.data.get(CONF_MONITOR_FCR_D, DEFAULT_MONITOR_FCR_D),
             ): bool,
             vol.Optional(
                 CONF_SUBSCRIBING_FCR_N,
-                default=self.config_entry.data.get(
-                    CONF_SUBSCRIBING_FCR_N, DEFAULT_SUBSCRIBING_FCR_N
-                ),
+                default=self.config_entry.data.get(CONF_SUBSCRIBING_FCR_N, DEFAULT_SUBSCRIBING_FCR_N),
             ): bool,
             vol.Optional(
                 CONF_SUBSCRIBING_FCR_D,
-                default=self.config_entry.data.get(
-                    CONF_SUBSCRIBING_FCR_D, DEFAULT_SUBSCRIBING_FCR_D
-                ),
+                default=self.config_entry.data.get(CONF_SUBSCRIBING_FCR_D, DEFAULT_SUBSCRIBING_FCR_D),
             ): bool,
         }
 
