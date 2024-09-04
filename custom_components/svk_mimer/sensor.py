@@ -1,4 +1,5 @@
 """Platform for sensor integration."""
+
 from __future__ import annotations
 
 import logging
@@ -368,7 +369,8 @@ class SVKMimerSensor(SensorEntity, SVKMimerEntity):
     def _get_prices_today(self) -> dict:
         """Returns only todays prices"""
         return self._get_prices_with_date(
-            prices=self.entity_description.value_fn(self.coordinator.data), date=date.today().strftime("%Y-%m-%d")
+            prices=self.entity_description.value_fn(self.coordinator.data),
+            date=date.today().strftime("%Y-%m-%d"),
         )
 
     @property

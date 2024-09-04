@@ -1,4 +1,5 @@
 """Common constants."""
+
 from homeassistant.const import Platform
 
 

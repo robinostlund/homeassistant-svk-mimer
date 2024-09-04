@@ -1,4 +1,5 @@
 """SVK Mimer integration."""
+
 import asyncio
 import logging
 import voluptuous as vol
@@ -48,7 +49,12 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
 
     def __init__(self, hass: HomeAssistant, *, entry: ConfigEntry) -> None:
         """Initialize data updater."""
-        super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=timedelta(seconds=UPDATE_INTERVAL))
+        super().__init__(
+            hass,
+            _LOGGER,
+            name=DOMAIN,
+            update_interval=timedelta(seconds=UPDATE_INTERVAL),
+        )
 
         self.session = Mimer()
 
@@ -57,7 +63,8 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
         _LOGGER.debug(f"called _fetch_data")
 
         await self.session.fetch(
-            period_from=date.today().strftime("%Y-%m-%d"), period_to=(date.today() + timedelta(1)).strftime("%Y-%m-%d")
+            period_from=date.today().strftime("%Y-%m-%d"),
+            period_to=(date.today() + timedelta(1)).strftime("%Y-%m-%d"),
         )
 
         return SVKMimerDeviceState(

@@ -1,4 +1,5 @@
 """Config flow to add the integration via the UI."""
+
 from __future__ import annotations
 
 import logging
@@ -8,7 +9,12 @@ from typing import Any
 import voluptuous as vol
 
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.config_entries import ConfigEntry, ConfigFlow, OptionsFlow, CONN_CLASS_CLOUD_POLL
+from homeassistant.config_entries import (
+    ConfigEntry,
+    ConfigFlow,
+    OptionsFlow,
+    CONN_CLASS_CLOUD_POLL,
+)
 from homeassistant.data_entry_flow import FlowResult
 
 from homeassistant.helpers.selector import (
@@ -101,14 +107,17 @@ class OptionsFlowHandler(OptionsFlow):
         # create configuration schema
         data_schema = {
             vol.Required(
-                CONF_KW_AVAILABLE, default=self.config_entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE)
+                CONF_KW_AVAILABLE,
+                default=self.config_entry.data.get(CONF_KW_AVAILABLE, DEFAULT_KW_AVAILABLE),
             ): vol.Coerce(float),
             vol.Optional(
-                CONF_FEE_PERCENT, default=self.config_entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT)
+                CONF_FEE_PERCENT,
+                default=self.config_entry.data.get(CONF_FEE_PERCENT, DEFAULT_FEE_PERCENT),
             ): vol.Coerce(int),
             vol.Optional(CONF_VAT, default=self.config_entry.data.get(CONF_VAT, DEFAULT_VAT)): bool,
             vol.Optional(
-                CONF_MONITOR_FCR_N, default=self.config_entry.data.get(CONF_MONITOR_FCR_N, DEFAULT_MONITOR_FCR_N)
+                CONF_MONITOR_FCR_N,
+                default=self.config_entry.data.get(CONF_MONITOR_FCR_N, DEFAULT_MONITOR_FCR_N),
             ): bool,
             vol.Optional(
                 CONF_MONITOR_FCR_D,
