@@ -1,4 +1,5 @@
 """SVK Mimer integration."""
+
 import asyncio
 import logging
 import voluptuous as vol
@@ -48,7 +49,12 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
 
     def __init__(self, hass: HomeAssistant, *, entry: ConfigEntry) -> None:
         """Initialize data updater."""
-        super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=timedelta(seconds=UPDATE_INTERVAL))
+        super().__init__(
+            hass,
+            _LOGGER,
+            name=DOMAIN,
+            update_interval=timedelta(seconds=UPDATE_INTERVAL),
+        )
 
         self.session = Mimer()
 
@@ -57,7 +63,8 @@ class SVKMimerDataUpdateCoordinator(DataUpdateCoordinator[SVKMimerDeviceState]):
         _LOGGER.debug(f"called _fetch_data")
 
         await self.session.fetch(
-            period_from=date.today().strftime("%Y-%m-%d"), period_to=(date.today() + timedelta(1)).strftime("%Y-%m-%d")
+            period_from=date.today().strftime("%Y-%m-%d"),
+            period_to=(date.today() + timedelta(1)).strftime("%Y-%m-%d"),
         )
 
         return SVKMimerDeviceState(
@@ -109,7 +116,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     # https://github.com/custom-components/nordpool/blob/master/custom_components/nordpool/__init__.py
     event_new_hr = async_track_time_change(hass, cb_new_hr, minute=0, second=0)
-    event_new_day = async_track_time_change(hass, cb_new_day, hour=0, minute=0, second=0)
+    event_new_day = async_track_time_change(
+        hass, cb_new_day, hour=0, minute=0, second=0
+    )
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(update_listener))
