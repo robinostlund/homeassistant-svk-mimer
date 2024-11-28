@@ -1,1 +1,1 @@
-aiosvkmimer==0.1.14
+aiosvkmimer==0.1.15
